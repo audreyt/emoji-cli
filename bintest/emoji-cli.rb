@@ -6,7 +6,8 @@ assert('poop') do
   output, status = Open3.capture2(BIN_PATH, "poop")
 
   assert_true status.success?, "Process did not exit cleanly"
-  assert_include output.force_encoding("utf-8"), "Copied 💩 !"
+  assert_equal "Copied 💩 !\n", output.force_encoding("utf-8")
+  assert_equal "💩", `xclip -o`
 end
 
 assert('version') do
